@@ -292,12 +292,13 @@
 }
 
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    NSString *title = [[self.items objectAtIndex:row] objectForKey:@"text"];
+    NSString *time = [[self.items objectAtIndex:row] objectForKey:@"text"];
     NSString *color = [[self.items objectAtIndex:row] objectForKey:@"color"];
-    NSString *price = [[self.items objectAtIndex:row] objectForKey:@"price"];
+    NSNumber *priceNum = [[self.items objectAtIndex:row] objectForKey:@"price"];
+    NSString *priceString = [priceNum stringValue];
+    //NSString *rowText = [priceString stringByAppendingString:title];
+    NSString *rowText = [NSString stringWithFormat:@"$%@ - %@", priceString, time];
     NSAttributedString *attrStr;
-
-    NSString *rowText = [price stringByAppendingString:title];
 
     // TODO: Use colorWithRed so we can dynamically set the color. Right now all
     // we can do is change the color to green
@@ -305,15 +306,14 @@
     // https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIColor_Class/#//apple_ref/occ/clm/UIColor/colorWithRed:green:blue:alpha:
 
     if ([ color isEqualToString:@"green"]) {
-      attrStr = [[NSAttributedString alloc] initWithString:title attributes:@{ NSForegroundColorAttributeName : [UIColor greenColor] }];
+      attrStr = [[NSAttributedString alloc] initWithString:rowText attributes:@{ NSForegroundColorAttributeName : [UIColor greenColor] }];
     } else {
-      attrStr = [[NSAttributedString alloc] initWithString:title attributes:@{ NSForegroundColorAttributeName : [UIColor blackColor] }];
+      attrStr = [[NSAttributedString alloc] initWithString:rowText attributes:@{ NSForegroundColorAttributeName : [UIColor blackColor] }];
     }
 
     return attrStr;
 
 }
-
 
 // Tell the picker the width of each row for a given component
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
