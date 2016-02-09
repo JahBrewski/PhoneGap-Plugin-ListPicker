@@ -294,7 +294,10 @@
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *title = [[self.items objectAtIndex:row] objectForKey:@"text"];
     NSString *color = [[self.items objectAtIndex:row] objectForKey:@"color"];
+    NSString *price = [[self.items objectAtIndex:row] objectForKey:@"price"];
     NSAttributedString *attrStr;
+
+    NSString *rowText = [price stringByAppendingString:title];
 
     // TODO: Use colorWithRed so we can dynamically set the color. Right now all
     // we can do is change the color to green
