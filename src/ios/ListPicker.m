@@ -294,7 +294,8 @@
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *time = [[self.items objectAtIndex:row] objectForKey:@"text"];
     NSString *color = [[self.items objectAtIndex:row] objectForKey:@"color"];
-    NSNumber *priceNum = [[self.items objectAtIndex:row] objectForKey:@"price"];
+
+    NSValue *priceNum = [[self.items objectAtIndex:row] objectForKey:@"price"];
     NSString *priceString = [priceNum stringValue];
     //NSString *rowText = [priceString stringByAppendingString:title];
     NSString *rowText = [NSString stringWithFormat:@"$%@ - %@", priceString, time];
