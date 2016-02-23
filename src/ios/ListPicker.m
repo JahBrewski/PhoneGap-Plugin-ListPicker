@@ -295,9 +295,15 @@
     NSString *time = [[self.items objectAtIndex:row] objectForKey:@"text"];
     NSString *color = [[self.items objectAtIndex:row] objectForKey:@"color"];
 
-    NSValue *priceNum = [[self.items objectAtIndex:row] objectForKey:@"price"];
-    NSString *priceString = [priceNum stringValue];
-    //NSString *rowText = [priceString stringByAppendingString:title];
+    NSDecimalNumber *priceNum = [[self.items objectAtIndex:row] objectForKey:@"price"];
+    NSString *priceString;
+    
+    if ([priceNum isKindOfClass:[NSDecimalNumber class]]) {
+       priceString = [priceNum stringValue];
+    } else {
+      priceString = priceNum;
+    }
+    
     NSString *rowText = [NSString stringWithFormat:@"$%@ - %@", priceString, time];
     NSAttributedString *attrStr;
 
@@ -315,6 +321,9 @@
     return attrStr;
 
 }
+
+
+
 
 // Tell the picker the width of each row for a given component
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
