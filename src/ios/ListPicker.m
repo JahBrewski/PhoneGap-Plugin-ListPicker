@@ -295,16 +295,17 @@
     NSString *time = [[self.items objectAtIndex:row] objectForKey:@"text"];
     NSString *color = [[self.items objectAtIndex:row] objectForKey:@"color"];
 
-    NSDecimalNumber *priceNum = [[self.items objectAtIndex:row] objectForKey:@"price"];
+    //NSDecimalNumber *priceNum = [[self.items objectAtIndex:row] objectForKey:@"price"];
     NSString *priceString;
     
-    if ([priceNum isKindOfClass:[NSDecimalNumber class]]) {
-       priceString = [priceNum stringValue];
-    } else {
-      priceString = priceNum;
-    }
+    //if ([priceNum isKindOfClass:[NSDecimalNumber class]]) {
+    //   priceString = [priceNum stringValue];
+    //} else {
+    //  priceString = priceNum;
+    //}
     
-    NSString *rowText = [NSString stringWithFormat:@"$%@ - %@", priceString, time];
+    //NSString *rowText = [NSString stringWithFormat:@"$%@ - %@", priceString, time];
+    NSString *rowText = [NSString stringWithFormat:@"%@", time];
     NSAttributedString *attrStr;
 
     // TODO: Use colorWithRed so we can dynamically set the color. Right now all
